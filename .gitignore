@@ -2,7 +2,7 @@ HELP.md
 .DS_Store
 .gradle
 build/
-
+**/application-dev.yml
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
