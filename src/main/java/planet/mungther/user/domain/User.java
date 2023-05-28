@@ -2,6 +2,9 @@ package planet.mungther.user.domain;
 
 import static javax.persistence.GenerationType.*;
 import static lombok.AccessLevel.*;
+import static planet.mungther.global.error.ErrorCode.*;
+
+import java.util.regex.Pattern;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import planet.mungther.global.error.BusinessException;
 
 @Entity
 @Getter
@@ -43,6 +47,7 @@ public class User {
 		final String email,
 		final String agreement
 	) {
+		validateEmail(email);
 		this.email = email;
 		this.agreement = agreement;
 	}
@@ -56,5 +61,17 @@ public class User {
 			.email(email)
 			.agreement(agreement)
 			.build();
+	}
+
+	private void validateEmail(final String email) {
+		if (isNotValidEmailPattern(email))
+			throw new BusinessException(USER_INVALID_EMAIL);
+	}
+
+	private static final String EMAIL_PATTERN = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+	private static final Pattern EMAIL_MATCHER = Pattern.compile(EMAIL_PATTERN);
+
+	private static boolean isNotValidEmailPattern(String email) {
+		return !EMAIL_MATCHER.matcher(email).matches();
 	}
 }

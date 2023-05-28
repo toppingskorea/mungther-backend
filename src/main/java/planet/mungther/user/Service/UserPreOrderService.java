@@ -14,10 +14,12 @@ import planet.mungther.user.repository.UserJpaRepository;
 @Transactional
 public class UserPreOrderService {
 
+	private final UserValidator userValidator;
 	private final UserJpaRepository userJpaRepository;
 
 	public Long createPreOrder(UserPreOrderRequest request) {
 		User user = User.of(request.getEmail(), request.getAgreement());
+		userValidator.validateEmailIsNotDuplicated(user.getEmail());
 		User savedUser = userJpaRepository.save(user);
 		return savedUser.getId();
 	}

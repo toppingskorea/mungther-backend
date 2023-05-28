@@ -9,7 +9,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Success {
 	private final boolean isSuccess;
-	private int userListSize;
 
 	public Success() {
 		this.isSuccess = true;

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import planet.mungther.global.dto.request.UserPreOrderRequest;
+import planet.mungther.global.dto.response.PreOrderCount;
 import planet.mungther.global.dto.response.Success;
 import planet.mungther.user.Service.UserPreOrderService;
 import planet.mungther.user.domain.User;
@@ -24,11 +25,11 @@ public class UserController {
 	private final UserJpaRepository userJpaRepository;
 
 	@GetMapping("/")
-	public ResponseEntity<Success> countPreOrders(
+	public ResponseEntity<PreOrderCount> countPreOrders(
 	) {
 		List<User> userList = userJpaRepository.findAll();
-		Success success = new Success();
-		success.setUserListSize(userList.size());
+		PreOrderCount success = new PreOrderCount();
+		success.updateUserCount(userList.size());
 		return ResponseEntity
 		.ok()
 		.body(success);
