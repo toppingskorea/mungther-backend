@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class UserController {
 	private final UserPreOrderService preOrderService;
 	private final UserJpaRepository userJpaRepository;
 
-	@PostMapping("/api")
+	@GetMapping("/")
 	public ResponseEntity<Success> countPreOrders(
 	) {
 		List<User> userList = userJpaRepository.findAll();
@@ -40,7 +41,7 @@ public class UserController {
 	) {
 		Long userId = preOrderService.createPreOrder(request);
 		return ResponseEntity
-			.created(URI.create("/api/new" + userId))
+			.created(URI.create("/new" + userId))
 			.body(new Success());
 	}
 }
