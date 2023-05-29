@@ -1,4 +1,4 @@
-package planet.mungther.user.domain;
+package planet.mungther.user.domain.user;
 
 import static javax.persistence.GenerationType.*;
 import static lombok.AccessLevel.*;
@@ -41,25 +41,32 @@ public class User {
 	@Column(name = "user_agreement", columnDefinition = "varchar(1)")
 	private String agreement;
 
+	@Column(name = "dog_name", columnDefinition = "varchar(100)")
+	private String dogName;
+
 	//==생성 Method==//
 	@Builder
 	public User(
 		final String email,
-		final String agreement
+		final String agreement,
+		final String dogName
 	) {
 		validateEmail(email);
 		this.email = email;
 		this.agreement = agreement;
+		this.dogName = dogName;
 	}
 
 	//==정적 팩토리 메소드==//
 	public static User of(
 		final String email,
-		final String agreement
+		final String agreement,
+		final String dogName
 	) {
 		return User.builder()
 			.email(email)
 			.agreement(agreement)
+			.dogName(dogName)
 			.build();
 	}
 

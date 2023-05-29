@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import planet.mungther.global.dto.request.UserPreOrderRequest;
-import planet.mungther.user.domain.User;
+import planet.mungther.user.domain.user.User;
 import planet.mungther.user.repository.UserJpaRepository;
 
 @Service
@@ -17,10 +17,9 @@ public class UserPreOrderService {
 	private final UserValidator userValidator;
 	private final UserJpaRepository userJpaRepository;
 
-	public Long createPreOrder(UserPreOrderRequest request) {
-		User user = User.of(request.getEmail(), request.getAgreement());
+	public void createPreOrder(UserPreOrderRequest request) {
+		User user = User.of(request.getEmail(), request.getAgreement(), request.getDogName());
 		userValidator.validateEmailIsNotDuplicated(user.getEmail());
-		User savedUser = userJpaRepository.save(user);
-		return savedUser.getId();
+		userJpaRepository.save(user);
 	}
 }

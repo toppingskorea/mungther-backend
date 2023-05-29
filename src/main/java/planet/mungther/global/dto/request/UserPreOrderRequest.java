@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class UserPreOrderRequest {
 	private String email;
 	private String agreement;
+	private String dogName;
 }

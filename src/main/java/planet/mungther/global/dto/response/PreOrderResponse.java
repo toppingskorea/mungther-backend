@@ -2,17 +2,15 @@ package planet.mungther.global.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class PreOrderCount {
+@NoArgsConstructor
+public class PreOrderResponse {
 	private int userCount;
-
-	public void updateUserCount(int userCount) {
-		this.userCount = userCount;
-	}
-
-	public PreOrderCount() {
-	}
+	private List<String> dogNameList;
 }
 

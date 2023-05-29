@@ -13,7 +13,6 @@ import planet.mungther.user.repository.UserQueryRepository;
 @Service
 @RequiredArgsConstructor
 public class UserValidator {
-
 	private final UserQueryRepository userQueryRepository;
 
 	public void validateEmailIsNotDuplicated(String email) {
